@@ -1,0 +1,21 @@
+<tr id="medida-{{ medida.id }}" style="background: rgba(192,57,43,0.08);">
+    <td>{{ medida.categoria.nome }}</td>
+    <td colspan="2">
+        <form hx-put="/medidas/{{ medida.id }}"
+              hx-target="#medida-{{ medida.id }}"
+              hx-swap="outerHTML"
+              style="display:flex; align-items:center; gap:0.5rem;">
+            <input type="number" step="0.1" min="0" name="valor"
+                   value="{{ medida.valor }}"
+                   class="edit-input" required>
+            <span style="color: var(--muted); font-size:0.8rem;">kg</span>
+            <button type="submit" class="btn-save">✓ Salvar</button>
+        </form>
+    </td>
+    <td>
+        <button hx-get="/medidas/{{ medida.id }}/cancelar"
+                hx-target="#medida-{{ medida.id }}"
+                hx-swap="outerHTML"
+                class="btn-delete">✕ Cancelar</button>
+    </td>
+</tr>

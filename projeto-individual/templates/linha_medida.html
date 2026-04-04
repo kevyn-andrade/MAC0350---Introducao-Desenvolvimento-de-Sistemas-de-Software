@@ -1,0 +1,18 @@
+{% set partes = medida.data.split('-') %}
+{% set data_br = partes[2] + '/' + partes[1] + '/' + partes[0] if partes|length == 3 else medida.data %}
+<tr id="medida-{{ medida.id }}">
+    <td>{{ medida.categoria.nome }}</td>
+    <td>{{ medida.valor }} kg</td>
+    <td>{{ data_br }}</td>
+    <td>
+        <button hx-get="/medidas/{{ medida.id }}/editar"
+                hx-target="#medida-{{ medida.id }}"
+                hx-swap="outerHTML"
+                class="btn-edit">Editar</button>
+        <button hx-delete="/medidas/{{ medida.id }}"
+                hx-confirm="Tem certeza que deseja excluir esta medida?"
+                hx-target="#medida-{{ medida.id }}"
+                hx-swap="outerHTML"
+                class="btn-delete">Excluir</button>
+    </td>
+</tr>
