@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body { font-family: sans-serif; max-width: 400px; margin: 60px auto; background: #f5f5f5; }
+        h1 { color: #333; }
+        form { background: white; padding: 24px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+        label { display: block; margin-top: 12px; font-weight: bold; color: #555; }
+        input { width: 100%; padding: 10px; margin-top: 4px; border: 1px solid #ccc; border-radius: 6px;
+                box-sizing: border-box; font-size: 1rem; }
+        button { margin-top: 18px; width: 100%; padding: 12px; background: #ff690a; color: white;
+                 border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; font-weight: bold; }
+        button:hover { background: #e55a00; }
+        p { text-align: center; margin-top: 12px; }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <!-- Formulário com POST tradicional (Form Data) para o FastAPI usar Form(...) -->
+    <form method="POST" action="/login">
+        <label>Nome</label>
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <label>Senha</label>
+        <input type="password" name="senha" placeholder="Sua senha" required>
+        <button type="submit">Entrar</button>
+    </form>
+    <p><a href="/">Não tem conta? Cadastre-se</a></p>
+</body>
+</html>

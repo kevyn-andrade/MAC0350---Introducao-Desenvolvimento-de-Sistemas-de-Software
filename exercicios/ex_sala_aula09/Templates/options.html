@@ -1,0 +1,35 @@
+<style>
+    .opcoes form { display:flex; flex-direction:column; gap:6px; margin-bottom:20px; }
+    .opcoes input { padding:10px; border-radius:6px; border:1px solid #555;
+                    background:#111; color:#e0e0e0; font-size:1rem; }
+    .opcoes button { padding:10px; border-radius:6px; border:none; font-weight:bold;
+                     cursor:pointer; font-size:1rem; }
+    .btn-add  { background:#28a745; color:white; }
+    .btn-del  { background:#dc3545; color:white; }
+    .btn-edit { background:#ff690a; color:white; }
+    #mensagem p { margin:4px 0; color:#aaa; font-size:0.9rem; }
+</style>
+
+<div class="opcoes">
+    <h3>Adicionar Aluno</h3>
+    <form hx-post="/novoAluno" hx-target="#mensagem" hx-swap="beforeend">
+        <input type="text" name="nome" placeholder="Nome do aluno" required>
+        <button type="submit" class="btn-add">Salvar</button>
+    </form>
+
+    <h3>Deletar Aluno</h3>
+    <form hx-delete="/deletaAluno" hx-target="#mensagem" hx-swap="beforeend">
+        <input type="number" name="id" placeholder="ID do aluno" required>
+        <button type="submit" class="btn-del">Deletar aluno</button>
+    </form>
+
+    <h3>Atualizar Aluno</h3>
+    <form hx-put="/atualizaAluno" hx-target="#mensagem" hx-swap="beforeend">
+        <input type="number" name="id" placeholder="ID do aluno" required>
+        <input type="text" name="novoNome" placeholder="Novo nome" required>
+        <button type="submit" class="btn-edit">Atualizar aluno</button>
+    </form>
+</div>
+
+<br>
+<div id="mensagem"></div>

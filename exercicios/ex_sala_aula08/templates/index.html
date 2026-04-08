@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4"></script>
+    <title>Meu Site</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: sans-serif; background: #1e1e1e; color: #e0e0e0; min-height: 100vh; }
+        header { background: #111; padding: 16px 24px; display: flex; align-items: center; gap: 16px;
+                 border-bottom: 2px solid #ff690a; }
+        header h1 { color: #ff690a; font-size: 1.4rem; }
+        nav { display: flex; gap: 8px; }
+        nav button {
+            padding: 8px 18px; border: 2px solid #ff690a; background: transparent;
+            color: #ff690a; border-radius: 6px; cursor: pointer; font-weight: bold;
+            transition: all 0.2s;
+        }
+        nav button:hover { background: #ff690a22; }
+        nav button.ativa { background: #ff690a; color: #fff; }
+        main { padding: 32px 24px; max-width: 800px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Meu Site</h1>
+        <nav>
+            <button id="btn-curtidas"
+                    class="ativa tab-btn"
+                    hx-get="/curtidas"
+                    hx-target="main"
+                    hx-push-url="true">
+                ❤️ Curtidas
+            </button>
+            <button id="btn-jupiter"
+                    class="tab-btn"
+                    hx-get="/jupiter"
+                    hx-target="main"
+                    hx-push-url="true">
+                📚 Júpiter
+            </button>
+            <button id="btn-professor"
+                    class="tab-btn"
+                    hx-get="/professor"
+                    hx-target="main"
+                    hx-push-url="true">
+                👨‍🏫 Professor
+            </button>
+        </nav>
+    </header>
+
+    <!-- Carrega a aba inicial automaticamente -->
+    <main hx-get="{{ pagina }}"
+          hx-target="main"
+          hx-trigger="load">
+    </main>
+
+    <!-- Div oculta que captura o atalho Shift+AltGr+P e cicla as abas -->
+    <div hx-get="/proxima-aba"
+         hx-trigger="keyup[shiftKey&&altKey&&(key=='p'||key=='P')] from:body"
+         hx-swap="none">
+    </div>
+
+    <script>
+        // Atualiza o indicador visual da aba ativa ao clicar
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('ativa'));
+                this.classList.add('ativa');
+            });
+        });
+    </script>
+</body>
+</html>

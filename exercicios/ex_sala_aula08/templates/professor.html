@@ -1,0 +1,59 @@
+<!-- Página de professor reformada -->
+<style>
+    .prof-card { display:flex; gap:28px; align-items:flex-start; }
+    .avatar { width:100px; height:100px; border-radius:50%; background:#ff690a;
+              display:flex; align-items:center; justify-content:center;
+              font-size:3rem; flex-shrink:0; }
+    .info h2 { color:#ff690a; margin-bottom:6px; }
+    .info p  { color:#aaa; margin-bottom:4px; font-size:0.95rem; }
+    .tag { display:inline-block; margin:3px; padding:4px 12px; background:#333;
+           border-radius:20px; font-size:0.8rem; color:#ccc; }
+    .horarios { margin-top:24px; }
+    .horarios h3 { color:#ff690a; margin-bottom:12px; }
+    .slot { background:#111; border:1px solid #333; border-radius:8px;
+            padding:12px 16px; margin-bottom:8px; display:flex; justify-content:space-between; }
+    .slot span { color:#888; font-size:0.9rem; }
+    .contato { margin-top:24px; display:flex; gap:12px; flex-wrap:wrap; }
+    .btn-contato { padding:8px 18px; border-radius:6px; font-size:0.9rem; font-weight:bold;
+                   cursor:pointer; text-decoration:none; display:inline-block; }
+    .btn-email { background:#ff690a; color:white; border:none; }
+    .btn-lattes { background:transparent; color:#ff690a; border:2px solid #ff690a; }
+</style>
+
+<div class="prof-card">
+    <div class="avatar">👨‍💻</div>
+    <div class="info">
+        <h2>Prof. Dr. João da Silva</h2>
+        <p>🏛️ Instituto de Matemática e Estatística – IME/USP</p>
+        <p>📧 joao.silva@ime.usp.br</p>
+        <p>🔬 Área: Engenharia de Software / Desenvolvimento Web</p>
+        <div style="margin-top:10px;">
+            <span class="tag">FastAPI</span>
+            <span class="tag">Python</span>
+            <span class="tag">Banco de Dados</span>
+            <span class="tag">HTMX</span>
+            <span class="tag">Arquitetura REST</span>
+        </div>
+    </div>
+</div>
+
+<div class="horarios">
+    <h3>📅 Horários de Atendimento</h3>
+    <div class="slot">
+        <strong>Segunda-feira</strong>
+        <span>10h – 12h &nbsp;|&nbsp; Sala 132-A</span>
+    </div>
+    <div class="slot">
+        <strong>Quarta-feira</strong>
+        <span>14h – 16h &nbsp;|&nbsp; Sala 132-A</span>
+    </div>
+    <div class="slot">
+        <strong>Online (Teams)</strong>
+        <span>Sexta-feira 15h – 16h</span>
+    </div>
+</div>
+
+<div class="contato">
+    <a href="mailto:joao.silva@ime.usp.br" class="btn-contato btn-email">✉️ Enviar Email</a>
+    <a href="#" class="btn-contato btn-lattes">📄 Currículo Lattes</a>
+</div>

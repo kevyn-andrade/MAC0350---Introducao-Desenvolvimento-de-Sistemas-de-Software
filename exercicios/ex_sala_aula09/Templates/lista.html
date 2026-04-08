@@ -1,0 +1,79 @@
+<!--
+    lista.html — busca dinâmica + paginação com HTMX
+    
+    Estratégia de paginação:
+      • O input de busca sempre reseta para pagina=1 (hx-vals)
+      • Os botões Anterior/Próximo passam a pagina correta (hx-vals)
+      • Ambos usam hx-include="#busca-input" para enviar o texto de busca atual
+      • hx-select="#lista" faz com que só a div#lista seja substituída,
+        mantendo o input de busca intacto
+-->
+
+<div>
+    <input type="text"
+           id="busca-input"
+           name="busca"
+           placeholder="Buscar por nome..."
+           value="{{ busca }}"
+           hx-get="/lista"
+           hx-target="#lista"
+           hx-trigger="input changed delay:500ms"
+           hx-select="#lista"
+           hx-vals='{"pagina": 1}'
+           style="padding:10px 14px; border-radius:8px; border:1px solid #555;
+                  background:#111; color:#e0e0e0; width:100%; font-size:1rem;">
+</div>
+
+<div id="lista" style="margin-top:16px;">
+    <ul style="list-style:none; padding:0;">
+        {% for aluno in alunos %}
+            <li style="padding:8px 0; border-bottom:1px solid #333;">
+                {{ aluno.id }} — {{ aluno.nome }}
+            </li>
+        {% else %}
+            <li style="color:#888; padding:8px 0;">Nenhum aluno encontrado.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- ── Paginação ──────────────────────────────────────────────────── -->
+    <div style="display:flex; align-items:center; gap:12px; margin-top:16px;">
+
+        <!-- Botão Anterior -->
+        <button
+            hx-get="/lista"
+            hx-target="#lista"
+            hx-select="#lista"
+            hx-include="#busca-input"
+            hx-vals='{"pagina": {{ pagina - 1 }}}'
+            {% if pagina <= 1 %}disabled{% endif %}
+            style="padding:8px 18px; border:2px solid #ff690a; background:transparent;
+                   color:{% if pagina <= 1 %}#555{% else %}#ff690a{% endif %};
+                   border-color:{% if pagina <= 1 %}#555{% else %}#ff690a{% endif %};
+                   border-radius:6px; cursor:{% if pagina <= 1 %}default{% else %}pointer{% endif %};
+                   font-weight:bold;">
+            ← Anterior
+        </button>
+
+        <!-- Indicador de página -->
+        <span style="color:#888; font-size:0.9rem;">
+            Página {{ pagina }} de {{ total_paginas }}
+        </span>
+
+        <!-- Botão Próximo -->
+        <button
+            hx-get="/lista"
+            hx-target="#lista"
+            hx-select="#lista"
+            hx-include="#busca-input"
+            hx-vals='{"pagina": {{ pagina + 1 }}}'
+            {% if pagina >= total_paginas %}disabled{% endif %}
+            style="padding:8px 18px; border:2px solid #ff690a; background:transparent;
+                   color:{% if pagina >= total_paginas %}#555{% else %}#ff690a{% endif %};
+                   border-color:{% if pagina >= total_paginas %}#555{% else %}#ff690a{% endif %};
+                   border-radius:6px; cursor:{% if pagina >= total_paginas %}default{% else %}pointer{% endif %};
+                   font-weight:bold;">
+            Próximo →
+        </button>
+
+    </div>
+</div>

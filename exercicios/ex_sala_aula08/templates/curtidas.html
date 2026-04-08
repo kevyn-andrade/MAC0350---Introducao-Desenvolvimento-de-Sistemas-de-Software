@@ -1,0 +1,37 @@
+<!-- Exercício 1: contador de curtidas + botão Curtir -->
+<!-- Exercício 2: botão de zerar com hx-confirm (sem JavaScript!) -->
+
+<h2 style="margin-bottom: 24px; color: #ff690a;">❤️ Curtidas</h2>
+
+<div style="background:#111; padding:24px; border-radius:12px; display:inline-flex;
+            align-items:center; gap:20px; border: 1px solid #333;">
+
+    <!-- Contador: atualizado pelo servidor sem recarregar a página -->
+    <p style="font-size: 2.5rem; font-weight: bold;">
+        <span id="contador">{{ curtidas }}</span>
+        <span style="font-size:1rem; color:#aaa;"> curtidas</span>
+    </p>
+
+    <!-- Botão Curtir – POST /curtir → substitui apenas o span#contador -->
+    <button hx-post="/curtir"
+            hx-target="#contador"
+            hx-swap="outerHTML"
+            style="padding:10px 20px; background:#ff690a; color:white;
+                   border:none; border-radius:8px; font-size:1.2rem; cursor:pointer;">
+        ❤️ Curtir!
+    </button>
+
+    <!-- Botão Zerar – DELETE /curtir com confirmação HTMX (sem JS!) -->
+    <button hx-delete="/curtir"
+            hx-target="#contador"
+            hx-swap="outerHTML"
+            hx-confirm="Tem certeza que deseja zerar todas as curtidas?"
+            style="padding:10px 20px; background:#555; color:white;
+                   border:none; border-radius:8px; font-size:1rem; cursor:pointer;">
+        🗑️ Zerar
+    </button>
+</div>
+
+<p style="margin-top:16px; color:#888; font-size:0.9rem;">
+    O contador mantém o valor mesmo ao trocar de aba e voltar!
+</p>
